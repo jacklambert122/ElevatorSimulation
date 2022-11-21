@@ -23,7 +23,7 @@ Google test was used to test current implementation against a brute force search
 
 ## Project Setup:
 ```sh
-git clone "this url"
+git clone https://github.com/jacklambert122/ElevatorSimulation.git
 
 ```
 
@@ -43,6 +43,7 @@ make #compiles Google Test
 
 ### For Mac: 
 ```sh
+cd ../../../
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles"
@@ -53,6 +54,8 @@ make all
 Default cmake generator is set to ninja with cmake tools extention... but from command line select which ever you like for build dir!
 
 ```sh
+cd ../../../
+mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Debug -G "[generator]"
 make all

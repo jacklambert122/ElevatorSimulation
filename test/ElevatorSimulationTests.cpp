@@ -41,7 +41,7 @@ class SmallElevatorTest : public ::testing::Test
     {
         // Set Test Object 
         startFloor = 10;
-        FloorsToVisit = {2, 3, 5, 15, 16};
+        FloorsToVisit = { 2, 3, 5, 15, 16};
 
         // Print out
         std::cout << "+----------------------------------------------" << std::endl;
@@ -161,6 +161,7 @@ TEST_F(SmallElevatorTest, test_search)
     std::vector<std::vector<int>> bestVectorBruteForce;
     int curBest = BestTimeMap.begin()->first;
     auto it = BestTimeMap.begin();
+
     while( it->first == curBest)
     {
         bestVectorBruteForce.emplace_back(it->second);
@@ -169,11 +170,13 @@ TEST_F(SmallElevatorTest, test_search)
 
     elevator->SearchBestDirectionNSet(); // Set the best route
     GetterSet = elevator->GetFloorsToVisit();
+    int ElevatorTime = elevator->GetTotalTraverseTime();
 
     bool bestValid = false;
  
     for(auto& vec : bestVectorBruteForce )
     {
+        vec.insert(vec.begin(), startFloor); // Add startFloor
         if( vec == GetterSet )
         {
             bestValid = true;
@@ -182,6 +185,8 @@ TEST_F(SmallElevatorTest, test_search)
     }
 
     EXPECT_TRUE( bestValid == true) << "Test Failed";
+    EXPECT_EQ( curBest, ElevatorTime ) << "Best time: " << curBest
+                << "ElevatorTime: " << ElevatorTime << std::endl;
     
 }
 
@@ -238,6 +243,7 @@ TEST_P(RandomElevatorTest, test_search)
     bool bestValid = (bestVectorBruteForce.size() > 0) ? false : true; // if empty check time only
     for(auto& vec : bestVectorBruteForce )
     {
+        vec.insert(vec.begin(), startFloor); // Add startFloor
         if( vec == ElevatorSet )
         {
             bestValid = true;

@@ -5,22 +5,40 @@
 #include <sstream>
 #include <vector>
 #include <map>
-#include <list>
 #include <set>
 
-
+/* ----------------------------------------------------------------------------------------------
+// PreComp Constants
+-----------------------------------------------------------------------------------------------*/
 #define TIME_PER_FLOOR          10
+#define TIME_VISITING_FLOOR     0
 #define OA_CLASS                0
 #define MY_CLASS                1
 #define ELEVATOR_TYPE        (OA_CLASS) // Where we assign
+/* --------------------------------------------------------------------------------------------*/ 
 
-
+// Direction enum to ensure type
 enum class direction {
     down = -1,
     idle =  0,
     up   =  1,
 };
 
+/* -----------------------------------------------------------------------------------------------
+Class to represent what I think was asked:
+    Purpose:
+        - no floor inputs and will find the fastest route
+    Assumptions:
+        - The elevator works by requesting user input for current floor and floors to visit
+
+    Inputs:
+        - Starting floor
+        - floors to visit
+    
+    outputs:
+        - Total travel time
+        - Floors visited 
+-------------------------------------------------------------------------------------------------*/
 
 class OA_Elevator
 {
@@ -28,11 +46,11 @@ class OA_Elevator
     protected:
  
         int m_CurrentFloor;
+        int m_TotalTraverseTime;
         std::set<int, std::greater<int>> m_DownFloorsToVisit;
         std::set<int> m_UpFloorsToVisit;
         std::vector<int> m_FloorsToVisit;
         direction m_CurrentDirection;
-        int m_TotalTraverseTime;
 
     public:
 
@@ -41,6 +59,10 @@ class OA_Elevator
 
         // Constructor
         OA_Elevator();
+
+        /* ----------------------------------------------------------------------------------------------
+           Setters
+           ----------------------------------------------------------------------------------------------*/
 
         // Want seperate setters for assert logic in gtest
         void SetCurrentFloor(int floor);
@@ -51,8 +73,25 @@ class OA_Elevator
         // Set total traverse time
         void SetTotalTraverseTime( int time );
 
+        // Sets floors to visit
+        void SetFloorsToVisit();
+
+        /* ----------------------------------------------------------------------------------------------
+           Getters
+           ----------------------------------------------------------------------------------------------*/
+
+        // Get best floors to visit
+        std::vector<int> GetFloorsToVisit();
+
         // Get total traverse time
-        int GetTotalTraverseTime( );
+        int GetTotalTraverseTime();
+
+        // Getter methods to contain elevator attributes to class
+        int GetCurrentFloor();
+
+        /* ----------------------------------------------------------------------------------------------
+          Calculators
+          ----------------------------------------------------------------------------------------------*/
 
         // Add floor to set above current
         void AddUpFloors(int floor);
@@ -60,28 +99,37 @@ class OA_Elevator
         // Add floor to set below curren
         void AddDownFloors(int floor);
 
-        // Set new floor to visit
+        // Add new floor to visit to single vector
         void AddFloorsToVisit(int floor);
 
-        // Clear we visited a floor
-        void ClearFloorNotVisited(int floor);
-
-        // Getter methods to contain elevator attributes to class
-        int GetCurrentFloor();
-
-        std::vector<int> GetFloorsToVisit();
-
-        void SetFloorsToVisit();
-
+        // Does the grunt work of searching and setting 
         void SearchBestDirectionNSet();
 
-        // UI
+        /* ----------------------------------------------------------------------------------------------
+           Interfaces
+           ----------------------------------------------------------------------------------------------*/
+
+        // Print best traversal and total time
+        void PrintBestFloorTraversal();
+
+        // Request user input
         void RequestUserInput();
 
-        // TODO: need to update current traversal array order
-        // Want this to be virtual
-        virtual void SetFloorTraversal(){std::cout<<"Base Class Floor Traversal Method" <<std::endl;}
+};
 
-        // TODO: need a requirement to request user info
+/* -----------------------------------------------------------------------------------------------
+Class that does what I think an elevator simulation should do :
+    Purpose:
+        - Multiple riders each requesting one floor each
+        - First request a direction then once "picked up" we add requested info
+            - Rider : (current floor, floor requested)
+                - (current < req ) ? down : up
+        - travels like a normal elevator by traversing in a set direction until no more passengers req
+
+    Assumptions:
+        - Starts at base level
+-------------------------------------------------------------------------------------------------*/
+class MyElevator
+{
 
 };
