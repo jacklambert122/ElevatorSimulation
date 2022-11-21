@@ -1,0 +1,68 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/jacklambert/Docs/VScode Projects/Elevator Simulation/src/ElevatorSimulation.cpp
+ElevatorSimulation.hpp
+/Users/jacklambert/Docs/VScode Projects/Elevator Simulation/src/ElevatorSimulation.hpp
+cstdlib
+-
+iostream
+-
+string
+-
+sstream
+-
+vector
+-
+map
+-
+list
+-
+iterator
+-
+set
+-
+cmath
+-
+
+/Users/jacklambert/Docs/VScode Projects/Elevator Simulation/src/ElevatorSimulation.hpp
+iostream
+-
+string
+-
+sstream
+-
+vector
+-
+map
+-
+list
+-
+set
+-
+
+/Users/jacklambert/Docs/VScode Projects/Elevator Simulation/src/main.cpp
+ElevatorSimulation.hpp
+/Users/jacklambert/Docs/VScode Projects/Elevator Simulation/src/ElevatorSimulation.hpp
+cstdlib
+-
+iostream
+-
+string
+-
+sstream
+-
+vector
+-
+map
+-
+list
+-
+iterator
+-
+

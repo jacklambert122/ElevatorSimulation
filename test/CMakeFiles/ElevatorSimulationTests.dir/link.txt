@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.0.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/ElevatorSimulationTests.dir/ElevatorSimulationTests.cpp.o  -o ElevatorSimulationTests ../lib/libgtest_main.a ../libElevatorSimulation.a ../lib/libgtest.a 

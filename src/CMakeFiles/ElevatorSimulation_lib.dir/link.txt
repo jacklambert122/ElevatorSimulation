@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc libElevatorSimulation_lib.a  CMakeFiles/ElevatorSimulation_lib.dir/ElevatorSimulation.cpp.o CMakeFiles/ElevatorSimulation_lib.dir/main.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib libElevatorSimulation_lib.a
