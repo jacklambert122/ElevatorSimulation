@@ -136,7 +136,6 @@ class RandomElevatorTest : public ::testing::TestWithParam<int>
 
 TEST_F(SmallElevatorTest, test_search)
 {
-    std::vector<int> GetterSet = elevator->GetFloorsToVisit();
 
     // Brute force approach
     int curTime;
@@ -161,19 +160,19 @@ TEST_F(SmallElevatorTest, test_search)
     std::vector<std::vector<int>> bestVectorBruteForce;
     int curBest = BestTimeMap.begin()->first;
     auto it = BestTimeMap.begin();
-
     while( it->first == curBest)
     {
         bestVectorBruteForce.emplace_back(it->second);
         it++;
     }
 
+    // Elevator attributes
     elevator->SearchBestDirectionNSet(); // Set the best route
-    GetterSet = elevator->GetFloorsToVisit();
+    std::vector<int> GetterSet = elevator->GetFloorsToVisit();
     int ElevatorTime = elevator->GetTotalTraverseTime();
 
+    // Check if Elevators best is in set of best times from BF
     bool bestValid = false;
- 
     for(auto& vec : bestVectorBruteForce )
     {
         vec.insert(vec.begin(), startFloor); // Add startFloor
@@ -184,6 +183,8 @@ TEST_F(SmallElevatorTest, test_search)
         }
     }
 
+    // Assert
+    
     EXPECT_TRUE( bestValid == true) << "Test Failed";
     EXPECT_EQ( curBest, ElevatorTime ) << "Best time: " << curBest
                 << "ElevatorTime: " << ElevatorTime << std::endl;
