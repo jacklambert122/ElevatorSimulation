@@ -47,10 +47,21 @@ source ~/.bash_profile
 
 ### For Mac: 
 ```sh
+mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles"
 make all
 ```
+
+### For Other OS: 
+Default cmake generator is set to ninja with cmake tools extention... but from command line select which ever you like for build dir!
+
+```sh
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Debug -G "[generator]"
+make all
+```
+
 ### run:
 ```sh
 ./src/ElevatorSimulation_run
@@ -58,15 +69,6 @@ make all
 ### test:
 ```sh
 ./test/ElevatorSimulation_tst
-```
-### For VS code: 
-Default cmake generator is set to ninja with cmake tools extention... but from command line select which ever you like for build dir!
-
-#### ex: 
-```sh
-cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug -G "[generator]"
-make all
 ```
 
 
