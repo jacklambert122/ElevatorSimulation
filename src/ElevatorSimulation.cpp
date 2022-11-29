@@ -9,7 +9,6 @@
 #include <cmath>
 #include <thread>
 
-
 // Default Constructor - Initalize so we dont ref unkown memory
 OA_Elevator::OA_Elevator() : m_CurrentFloor(0), m_FloorTraversalTime(TIME_PER_FLOOR), m_DoorTime(TIME_VISITING_FLOOR), m_TotalTraverseTime(0) { }
 
@@ -147,6 +146,63 @@ void OA_Elevator::SearchBestDirectionNSet()
   Interface
   ----------------------------------------------------------------------------------------------*/
 
+void OA_Elevator::printProgress(float ind, const int WIDTH)
+{
+    std::string arrowString = "^";
+    int lPad = ind - 1;
+    int rPad = WIDTH - lPad;
+    std::string lBlanks(lPad, ' ');
+    std::string rBlanks(rPad, ' ');
+    std::string outString = lBlanks + arrowString + rBlanks;
+    printf("\r %*s", WIDTH, outString.c_str());
+    fflush(stdout); // no newline so force it
+}
+
+void OA_Elevator::SimulateElevatorTraversal()
+{
+
+    // Sort for elevator display
+    std::vector<int> sortedVector(m_FloorsToVisit);
+    sort(sortedVector.begin(), sortedVector.end());
+
+    // String stream 
+    std::stringstream ss;
+    ss << " [ ";
+    for ( auto floor : sortedVector )
+    {
+        // last element
+        if( (floor) == *sortedVector.rbegin())  { 
+            ss << floor << " ]";
+        }else{
+            ss << floor << " ";
+        }
+    }
+
+    // Variables
+    float ind;
+    std::string sFloor;
+    std::string ssToStr; 
+
+    // String stream to string to find index in stream
+    ssToStr = ss.str();
+    const int STR_SIZE = ssToStr.size();
+    
+    // Elevator Simulation print out
+    std::cout << std::endl << "Elevator Simulated Cmdline Traversal: " << std::endl;
+    std::cout << ssToStr <<std::endl;
+
+    // Display in fastest traversal order
+    for ( auto floor : m_FloorsToVisit )
+    {
+        sFloor = std::to_string(floor);
+        ind = ssToStr.find( sFloor );
+        printProgress(ind, STR_SIZE);
+        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    }
+    std::cout << std::endl;
+
+}
+
 void OA_Elevator::PrintBestFloorTraversal()
 {
     std::cout << " Total Traversal Time: " << GetTotalTraverseTime() << std::endl;
@@ -204,6 +260,7 @@ void OA_Elevator::RequestUserInput()
 
         SearchBestDirectionNSet(); // Search and set best direction 
         PrintBestFloorTraversal(); // Print the Best Found
+        SimulateElevatorTraversal();
 
         std::cout << "+=============================+" << std::endl;
 

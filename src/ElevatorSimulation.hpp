@@ -10,7 +10,9 @@
 /* ----------------------------------------------------------------------------------------------
 // PreComp Constants
 -----------------------------------------------------------------------------------------------*/
-#define TIME_PER_FLOOR          10
+//#define SIM_ARR_WIDTH          60
+//#define SIM_STR                "*||||||||||||||||||||||||||||||#|||||||||||||||||||||||||||^"
+#define TIME_PER_FLOOR         10
 #define TIME_VISITING_FLOOR     0
 #define OA_CLASS                0
 #define MY_CLASS                1
@@ -108,6 +110,12 @@ class OA_Elevator
         /* ----------------------------------------------------------------------------------------------
            Interfaces
            ----------------------------------------------------------------------------------------------*/
+
+        // Helper Function to Print the Simulated Traveral
+        void printProgress(float indRatio, int width);
+
+        // Simulate Elevator Traversal on cmd line
+        void SimulateElevatorTraversal();
 
         // Print best traversal and total time
         void PrintBestFloorTraversal();
